@@ -23,7 +23,8 @@ const botConfig = {
   notificationLogText: 'Пользователь успешно оповещён о событии',
   notificationErrorLogText: 'Пользователь не получил оповещение',
   userAcceptLogText: 'Пользователь принял приглашение',
-  userDeclineLogText: 'Пользователь отклонил приглашение'
+  userDeclineLogText: 'Пользователь отклонил приглашение',
+  meetingFailText: 'Извините, но Ваша встреча не состоится'
 };
 
 const getEventDescription = event => {
@@ -94,6 +95,12 @@ module.exports = {
           message += `${getEventDescription(event)}`;
         }
         break;
+      case 'meetingFail':
+        message += `${botConfig.meetingFailText}${'\n'}`;
+        if (event) {
+          message += `${getEventDescription(event)}`;
+        }
+        break;
 
       default:
         message += `${notifyType}`;
@@ -138,3 +145,4 @@ module.exports = {
       .catch(error => logger.error(error));
   }
 };
+
